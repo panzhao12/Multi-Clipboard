@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Multi-Clipboard</title>
+    <script>
+      function copyText(e) {
+        let textArea = e.nextElementSibling;
+        textArea.select();
+        document.execCommand('copy');
+      }
+      function addArea() {
+        let copiedElement = document.querySelector('.btnArea').cloneNode(true);
+        copiedElement.childNodes[3].value = '';
+        document.body.appendChild(copiedElement);
+      }
+      function clearArea() {
+        let textAreaList = document.getElementsByClassName('textArea');
+        for (textArea of textAreaList) {
+          textArea.value = "";
+        }
+      }
+    </script>
+    <style>
+      .btnArea {
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 12px;
+      }
+      .btn,#addBtn,#clearBtn {
+        width: auto;
+        height: 35px;
+      }
+      .textArea {
+        width: auto;
+        height: auto;
+      }
+      .btn {
+        margin-right: 2px;
+      }
+      #addBtn {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <button id="addBtn" onclick="addArea()">Add</button>
+      <button id="clearBtn" onclick="clearArea()">Clear All</button>
+    </div>
+    <div class="btnArea">
+      <button class="btn" onclick="copyText(this)">Go</button>
+      <textarea class="textArea"></textarea>
+    </div>
+  </body>
+</html>
